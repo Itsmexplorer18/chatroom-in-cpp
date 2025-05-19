@@ -1,3 +1,4 @@
+//understanding the server functions
 void accept_connection(tcp::acceptor &acceptor, Room &room) {
     acceptor.async_accept([&](boost::system::error_code ec, tcp::socket socket) {
         if(!ec) {
