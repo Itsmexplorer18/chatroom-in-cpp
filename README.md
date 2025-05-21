@@ -27,13 +27,38 @@ This is a simple C++ chatroom application that allows multiple users to connect 
 - Provides a user interface for sending messages
 - Receives and displays messages from other participants
 
-## How It Works
-1. The server starts and listens for incoming connections
-2. Clients connect to the server using the provided IP and port
-3. When a client connects, a new Session is created to handle their communication
-4. The Session joins the Room, making it part of the chatroom
-5. Messages sent by clients are distributed to all connected participants
-6. Asynchronous I/O operations ensure efficient handling of multiple connections
+#### Key Classes:
+- **`Participant`** (interface):
+  - Abstract base for clients connected to the server.
+  - Requires `deliver()` and `write()` methods.
+
+- **`Room`**:
+  - Manages a set of connected participants.
+  - Broadcasts messages to all participants.
+  - Maintains a message queue with a limited history.
+
+- **`Session`**:
+  - Represents a single connected client session.
+  - Inherits from `Participant`.
+  - Handles socket I/O using `async_read` and `async_write`.
+  - Adds/removes itself from the room upon connect/disconnect.
+  - Receives and sends `Message` objects.
+### How It Works
+
+1. **Server Side** :
+   - Accepts incoming connections.
+   - Creates a `Session` for each client.
+   - Adds the `Session` to the `Room`.
+
+2. **Client Side**:
+   - Connects to the server using IP and port.
+   - Continuously reads messages asynchronously.
+   - Sends user input messages to the server in a separate thread.
+
+3. **Communication Flow**:
+   - Client types a message and sends it.
+   - Server receives it in the client's session.
+   - Server delivers the message to all other participants via the `Room`.
 
 ## Network Communication
 - Built using Boost.Asio library for asynchronous network I/O
