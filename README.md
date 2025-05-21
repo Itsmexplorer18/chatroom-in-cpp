@@ -3,6 +3,10 @@
 ## Overview
 This is a simple C++ chatroom application that allows multiple users to connect and communicate with each other in real-time over a TCP/IP network. The application consists of a server that manages the chatroom and clients that connect to it.
 
+## What is Boost.Asio?
+
+**Boost.Asio** is a cross-platform C++ library for network and low-level I/O programming. It provides a consistent asynchronous model using `io_context`, sockets, timers, and more. The core strength of Boost.Asio is its support for asynchronous operations using callbacks or coroutines, which enables highly scalable and responsive applications like chat servers, without blocking threads unnecessarily.
+
 ## Components
 
 ### Message (message.hpp)
