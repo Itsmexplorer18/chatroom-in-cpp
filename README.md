@@ -58,6 +58,12 @@ This is a simple C++ chatroom application that allows multiple users to connect 
    - Connects to the server using IP and port.
    - Continuously reads messages asynchronously.
    - Sends user input messages to the server in a separate thread.
+   - Why Two Threads Are Necessary:
+        The dual-thread architecture solves a fundamental blocking I/O problem:
+        std::getline() is synchronous and blocking - there's no async version in standard C++
+        If everything ran on one thread, the client would freeze while waiting for user input
+        Incoming messages would pile up unread until the user finishes typing
+        The separate threads ensure network operations continue regardless of user input state
 
 3. **Communication Flow**:
    - Client types a message and sends it.
