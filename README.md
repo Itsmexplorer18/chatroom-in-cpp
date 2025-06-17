@@ -79,4 +79,5 @@ This is a simple C++ chatroom application that allows multiple users to connect 
 Compile the server and client applications separately and run them as follows:
 1. Start the server with the desired port number
 2. Connect multiple clients using the server's IP address and port
-3. Start chatting across the network
+
+##
